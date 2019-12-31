@@ -1,0 +1,57 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: docker.gf.com.cn/gtp/gtpnode:unittest-ca-node10
+
+# Pick zero or more services to be used on all builds.
+# Only needed when using a docker container to run your tests in.
+# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
+# services:
+#  - mysql:latest
+#  - redis:latest
+#  - postgres:latest
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+# https://docs.gitlab.com/ee/ci/caching/#caching-nodejs-dependencies
+# yarn 官方推荐cache配置文档 https://yarnpkg.com/lang/en/docs/install-ci/
+cache:
+  key: AsmdCalc_${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .yarn
+
+before_script:
+  - npm config set registry http://registry_npm.gf.com.cn
+  # - ls -l
+  - yarn install --ignore-scripts --registry=http://registry_npm.gf.com.cn
+
+stages:
+  # - lint
+  - test
+  # - deploy
+
+# code_lint:
+#   stage: lint
+#   script:
+#     - npm run lint
+#   retry: 2
+#   tags:
+#     - gitlab-runner
+#     - node
+
+unit_test:
+  stage: test
+  cache:
+    key: AsmdCalc__${CI_COMMIT_REF_SLUG}
+    policy: pull
+    paths:
+      - node_modules/
+      - .yarn
+  script:
+    - npm run test
+    - npm run cov:summary
+  retry: 2
+  tags:
+    - gitlab-runner
+    - node
