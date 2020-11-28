@@ -1,8 +1,8 @@
 /*
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
- * @LastEditors  : gflizhiwen
- * @LastEditTime : 2019-12-31 19:41:49
+ * @LastEditors: lzw
+ * @LastEditTime: 2020-11-28 11:47:59
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
@@ -50,7 +50,7 @@ export function toNonExponential(num: number): string {
  */
 export function add(...args): number {
   let total = 0;
-  args.forEach(val => {
+  args.forEach((val) => {
     if (!val) return;
     if (!total) return (total = val);
 
@@ -105,7 +105,7 @@ export function mul(...args): number {
 
   if (!args.length) return 0;
 
-  args.forEach(value => {
+  args.forEach((value) => {
     value = Number(value) || 0;
     if (!value || !total) return (total = 0);
     if (1 === total) return (total = value);
@@ -145,11 +145,13 @@ export function div(...args): number {
 
   let total = Number(args[0]) || 0;
 
-  args.slice(1).forEach(value => {
+  args.slice(1).forEach((value) => {
     value = Number(value) || 0;
 
     const decimalLen = getDecimalLen(value) - getDecimalLen(total);
-    const e = Math.pow(10, decimalLen);
+    let e = Math.pow(10, decimalLen);
+    if (decimalLen < 0) e = Number(e.toFixed(-decimalLen));
+
     const aa = Number(toNonExponential(total).replace('.', ''));
     const bb = Number(toNonExponential(value).replace('.', ''));
     total = e === 1 ? aa / bb : mul(aa / bb, e);
