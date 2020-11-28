@@ -18,3 +18,4 @@ yarn.lock
 commitlint.config.js
 .editorconfig
 publish.bat
+.yarnrc
