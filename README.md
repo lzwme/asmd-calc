@@ -1,37 +1,46 @@
-[![Code Climate](https://lzw.me/images/logo.png)](https://lzw.me)
+[![https://lzw.me](https://lzw.me/images/logo.png)](https://lzw.me)
 [![@lzwme/asmd-calc](https://nodei.co/npm/@lzwme/asmd-calc.png)][download-url]
 
 @lzwme/asmd-calc
 ========
 
-[![NPM version][npm-image]][npm-url]
-[![node version][node-image]][node-url]
-[![npm download][download-image]][download-url]
-[![GitHub issues][issues-img]][issues-url]
-[![GitHub forks][forks-img]][forks-url]
-[![GitHub stars][stars-img]][stars-url]
+[![NPM version][npm-badge]][npm-url]
+[![node version][node-badge]][node-url]
+[![npm download][download-badge]][download-url]
+[![minzipped size][bundlephobia-badge]][bundlephobia-url]
+[![GitHub issues][issues-badge]][issues-url]
+[![GitHub forks][forks-badge]][forks-url]
+[![GitHub stars][stars-badge]][stars-url]
+![license MIT](https://img.shields.io/github/license/lzwme/asmd-calc)
 
-[stars-img]: https://img.shields.io/github/stars/lzwme/asmd-calc.svg
+[stars-badge]: https://img.shields.io/github/stars/lzwme/asmd-calc.svg
 [stars-url]: https://github.com/lzwme/asmd-calc/stargazers
-[forks-img]: https://img.shields.io/github/forks/lzwme/asmd-calc.svg
+[forks-badge]: https://img.shields.io/github/forks/lzwme/asmd-calc.svg
 [forks-url]: https://github.com/lzwme/asmd-calc/network
-[issues-img]: https://img.shields.io/github/issues/lzwme/asmd-calc.svg
+[issues-badge]: https://img.shields.io/github/issues/lzwme/asmd-calc.svg
 [issues-url]: https://github.com/lzwme/asmd-calc/issues
-[npm-image]: https://img.shields.io/npm/v/@lzwme/asmd-calc.svg?style=flat-square
+[npm-badge]: https://img.shields.io/npm/v/@lzwme/asmd-calc.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@lzwme/asmd-calc
-[node-image]: https://img.shields.io/badge/node.js-%3E=_10.9.0-green.svg?style=flat-square
+[node-badge]: https://img.shields.io/badge/node.js-%3E=_10.9.0-green.svg?style=flat-square
 [node-url]: https://nodejs.org/download/
-[download-image]: https://img.shields.io/npm/dm/@lzwme/asmd-calc.svg?style=flat-square
+[download-badge]: https://img.shields.io/npm/dm/@lzwme/asmd-calc.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@lzwme/asmd-calc
+[bundlephobia-url]: https://bundlephobia.com/result?p=@lzwme/asmd-calc@latest
+[bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/@lzwme/asmd-calc@latest
 
 支持浮点数精度的加减乘除四则运算 JS 工具方法库。
 
 提供常见的加(`add`)、减(`sub`)、乘(`mul`)、除(`div`)计算方法，可满足涉及金额或价格处理等前端数据计算的绝大多数场景。
 
+**为什么选用 `asmd-calc`：**
+
+- 短小精悍。仅包含加减乘除计算，核心代码不足百行，无其他依赖，文件小巧够用
+- 相对准确稳定。数个金融类交易系统多年开发实践经验的积累，覆盖了常见的各种计算用例误差场景
+
 **不适用的情况：**
 
 - 对于涉及超大数等前端无法精确表示的数值处理，应当由后端语言计算并使用字符串方式返回给前端展示。
-- 对于较为复杂的数学科学计算需求，推荐使用开源库 [decimal.js](https://github.com/MikeMcl/decimal.js)，具体可参见其文档 [decimal.js API](http://mikemcl.github.io/decimal.js/)。
+- 对于较为复杂的数学科学计算需求，推荐使用开源库如 [math.js](https://mathjs.org/index.html)、[decimal.js](https://github.com/MikeMcl/decimal.js)、[calculatorjs](https://github.com/fzred/calculatorjs)、[bignumber.js](https://github.com/MikeMcl/bignumber.js)、[big.js/](https://github.com/MikeMcl/big.js/)等，具体可分别参见其官方文档。
 
 ## 安装
 
@@ -109,7 +118,31 @@ console.log(a.add(0.1).add(0.2, 0.3));
 // => 0.6
 ```
 
+## 开发与测试
 
+- 开发
+
+```bash
+yarn install
+yarn start
+```
+
+- 测试
+
+```bash
+yarn test
+```
+
+- 构建
+
+```bash
+yarn build
+```
+
+
+## 相关参考
+
+- [确保前端 JavaScript 浮点数精度的四则运算方法](https://lzw.me/a/javascript-floating-point-arithmetic.html)
 ## License
 
 `@lzwme/asmd-calc` is released under the MIT license.
