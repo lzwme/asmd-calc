@@ -64,7 +64,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-immutable": "^6.0.1",
     "typedoc": "^0.20.19",
-    "typescript": "^4.1.3"
+    "typescript": "^3.8.3"
   },
   "ava": {
     "failFast": true,
