@@ -9,4 +9,4 @@ coverage
 *.log
 
 package-lock.json
-yarn.locak
+yarn.lock

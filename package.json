@@ -12,7 +12,10 @@
   "license": "MIT",
   "keywords": [
     "calc",
-    "decimal"
+    "decimal",
+    "浮点数计算",
+    "浮点数精确计算",
+    "浮点数精确计算插件"
   ],
   "scripts": {
     "start": "npm run watch",

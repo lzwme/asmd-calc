@@ -2,7 +2,7 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2020-11-28 11:47:59
+ * @LastEditTime: 2021-03-15 11:54:09
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
@@ -179,15 +179,64 @@ export function div(...args): number {
  */
 export function keepDotLength(value: number | string, len: number, isRounding = false): number {
   if (isNull(value)) return null;
-  if ((+len <= 0 && len !== 0) || isNull(len)) return Number(value);
+  if (isNull(len) || (+len <= 0 && len !== 0)) return Number(value);
 
   len = Number(len);
 
-  if (isRounding) return Number(Number(value).toFixed(len));
+  if (isRounding) return Number(toFixed(Number(value), len));
+  // if (isRounding) return Number(Number(value).toFixed(len));
 
   let str = toNonExponential(Number(value));
 
   if (str.indexOf('.') !== -1) str = str.substring(0, str.indexOf('.') + len + 1);
 
   return Number(str);
+}
+
+/**
+ * toFixed 方法重写。 Number.toFixed 方法在不同浏览器表现不一致
+ *
+ * ### Example (es module)
+ * ```js
+ * import { toFixed } from 'asmd-calc';
+ * console.log(toFixed(0.66666, 2));
+ * // => 0.67
+ * console.log(toFixed(1.45, 1));
+ * // => 1.5
+ * console.log(toFixed(1.55, 1));
+ * // => 1.6
+ * console.log(toFixed(1.515, 2));
+ * // => 1.52
+ * ```
+ *
+ * @param value 数值
+ * @param len 小数位数
+ */
+export function toFixed(value: number | string, len: number): string {
+  if (isNull(value)) return null;
+  value = Number(value);
+  if (isNull(len) || (+len <= 0 && len !== 0)) return String(value);
+  len = Number(len);
+
+  if (len === 0) return String(Math.round(value));
+
+  const valList = String(value).split('.');
+
+  if (!valList[1]) {
+    valList[1] = new Array(len + 1).join('0');
+    return valList.join('.');
+  } else {
+    let result = String(Math.round(Math.pow(10, len) * Number('0.' + valList[1])) / Math.pow(10, len));
+
+    const tmp = result.split('.');
+    // 小数部分末尾补 0
+    if (tmp[1].length < len) {
+      tmp[1] += new Array(len - tmp[1].length + 1).join('0');
+      // tmp[1] = tmp[1].padEnd(len);
+    }
+    tmp[0] = valList[0];
+    result = tmp.join('.');
+
+    return result;
+  }
 }

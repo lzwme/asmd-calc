@@ -118,6 +118,17 @@ console.log(a.add(0.1).add(0.2, 0.3));
 // => 0.6
 ```
 
+## API
+
+- `add(...args)` 加法运算
+- `sub(...args)` 减法运算
+- `mul(...args)` 乘法运算
+- `div(...args)` 除法运算
+- `keepDotLength(value, len, isRounding = false)` 保留 N 位小数(支持四舍五入或截断)
+- `toFixed(value, len)` 保留 N 位小数(四舍五入，返回字符串)
+- `getDecimalLen(num)` 获取指定数值的小数位长度
+- `toNonExponential(num)` 将指定的浮点数转换为非科学计数法的字符串格式
+
 ## 开发与测试
 
 - 开发
@@ -138,7 +149,6 @@ yarn test
 ```bash
 yarn build
 ```
-
 
 ## 相关参考
 

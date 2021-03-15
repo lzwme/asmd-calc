@@ -1,5 +1,5 @@
 // tslint:disable:typedef
-import { add, div, keepDotLength, mul, sub, toNonExponential } from './calculation';
+import { add, div, keepDotLength, mul, sub, toFixed, toNonExponential } from './calculation';
 
 /**
  * 支持浮点数四则运算的链式操作类
@@ -123,6 +123,25 @@ export class AsmdCalc {
   public keepDotLength(len: number, isRounding = false) {
     this.total = keepDotLength(this.total, len, isRounding);
     return this;
+  }
+  /**
+   * 最多保留 N 位小数
+   *
+   * ### Example (es module)
+   * ```js
+   * import { AsmdCalc } from 'asmd-calc';
+   * const a = new AsmdCalc(1.45);
+   * console.log(a.toFixed(1));
+   * // => 0.5
+   * console.log(a.toFixed(2));
+   * // => 1.45
+   * console.log(a.toFixed(3));
+   * // => 1.450
+   * ```
+   *
+   */
+  public toFixed(len: number) {
+    return toFixed(this.total, len);
   }
   protected valueOf() {
     return this.total;
