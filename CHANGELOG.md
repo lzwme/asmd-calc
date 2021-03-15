@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.1.0 (2021-03-15)
+
+
+### Features
+
+* 新增 toFixed 方法，取代 Number.toFixed 在不同浏览器表现不一致的问题 ([0267ff9](https://github.com/lzwme/asmd-calc/commit/0267ff9d58fbd9cb0eacfbfea37f2fe87fb72a70))
+
+
+### Bug Fixes
+
+* 修正 div 方法的 bug(修正 Math.pow(-5) 导致的精度错误问题) ([942bcfe](https://github.com/lzwme/asmd-calc/commit/942bcfe10a64636bd028e67c611638e7ae29d5e5))
+
 ### 1.0.6 (2020-11-28)
 
 
