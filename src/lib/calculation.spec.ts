@@ -3,7 +3,7 @@ import test from 'ava';
 import * as calc from './calculation';
 
 test('toNonExponential 将指定的数值转换为非科学计数法的字符串格式', (t) => {
-  const toNExpList: ReadonlyArray<any> = [
+  const toNExpList = [
     [Infinity, 'Infinity'],
     [-Infinity, '-Infinity'],
     [0, '0'],
@@ -24,7 +24,7 @@ test('toNonExponential 将指定的数值转换为非科学计数法的字符串
 });
 
 test('addition 各种入参测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [NaN, 3, 3],
     [3, NaN, 3],
     [null, 3, 3],
@@ -44,7 +44,7 @@ test('addition 各种入参测试', (t) => {
 });
 
 test('addition 加法计算支持无限参数个数', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     { param: [0.1, 0.2], value: 0.3 },
     { param: [1, 2, 0.1, 0.2, 0.3], value: 3.6 },
     { param: [null, 1.1, 2.2, 3, 4], value: 10.3 },
@@ -60,7 +60,7 @@ test('addition 加法计算支持无限参数个数', (t) => {
 });
 
 test('addition 科学计数法数值测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [1e2, 2e2, 300],
     [1e-2, 2e-2, 3e-2],
     [1e-10, 2e-10, 3e-10],
@@ -73,7 +73,7 @@ test('addition 科学计数法数值测试', (t) => {
 });
 
 test('subtraction 各种入参测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [3, 2, 1],
     [null, 3, -3],
     [1, null, 1],
@@ -91,7 +91,7 @@ test('subtraction 各种入参测试', (t) => {
 });
 
 test('subtraction 减法计算支持无限参数个数', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     { param: [0.3, 0.1, 0.2], value: 0 },
     { param: [3.6, 1, 2, 0.1, 0.2, 0.3], value: 0 },
     { param: [10.3, null, 1.1, 2.2, 3, 4], value: 0 },
@@ -107,7 +107,7 @@ test('subtraction 减法计算支持无限参数个数', (t) => {
 });
 
 test('multiplication 各种入参测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [3, 2, 6],
     [null, 3, 0],
     [1, null, 0],
@@ -126,7 +126,7 @@ test('multiplication 各种入参测试', (t) => {
 });
 
 test('multiplication 乘法计算支持无限参数个数', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     { param: [3, 0.1, 0.2], value: 0.06 },
     { param: [3.6, 1, 2, 0.1, 0.2, 0.3], value: 0.0432 },
     { param: [10.3, null, 1.1, 2.2, 3, 4], value: 0 },
@@ -142,7 +142,7 @@ test('multiplication 乘法计算支持无限参数个数', (t) => {
 });
 
 test('division 各种入参测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [0, 0, NaN],
     [6, 3, 2],
     [6, 0, Infinity],
@@ -164,7 +164,7 @@ test('division 各种入参测试', (t) => {
 });
 
 test('division 除法计算支持无限参数个数', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     { param: [0.06, 3, 0.1, 0.2], value: 1 },
     { param: [0.0432, 3.6, 1, 2, 0.1, 0.2, 0.3], value: 1 },
     { param: [10.3, null, 1.1, 2.2, 3, 4], value: Infinity },
@@ -181,7 +181,7 @@ test('division 除法计算支持无限参数个数', (t) => {
 });
 
 test('keepDotLength 各种入参测试（截断模式）', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [null, 3, null],
     [void 0, 3, null],
     [1, null, 1],
@@ -206,7 +206,7 @@ test('keepDotLength 各种入参测试（截断模式）', (t) => {
 });
 
 test('keepDotLength 各种入参测试（四舍五入方式，等同于 toFixed 结果转整数）', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [null, 3, null],
     [1, null, 1],
     [1.55, null, 2],
@@ -230,7 +230,7 @@ test('keepDotLength 各种入参测试（四舍五入方式，等同于 toFixed 
 });
 
 test('toFixed 各种入参测试', (t) => {
-  const list: ReadonlyArray<any> = [
+  const list = [
     [null, 3, null],
     [1, null, 1],
     [1.45, 1, 1.5],
@@ -253,6 +253,6 @@ test('toFixed 各种入参测试', (t) => {
   ];
 
   list.forEach((item) => {
-    t.is(calc.toFixed(item[0], item[1]), null == item[2] ? item[2] : String(item[2]));
+    t.is(calc.toFixed(item[0], item[1] as number), null == item[2] ? item[2] : String(item[2]));
   });
 });

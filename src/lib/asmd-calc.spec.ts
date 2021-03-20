@@ -7,7 +7,7 @@ test('AsmdCalc', (t) => {
   t.is(+a, 12);
   t.is(a.value, 12);
 
-  const b: any = new AsmdCalc(15);
+  const b = new AsmdCalc(15);
   t.is(+b, 15);
   t.is(b.value, 15);
 

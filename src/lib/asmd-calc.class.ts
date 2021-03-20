@@ -14,19 +14,17 @@ export class AsmdCalc {
   constructor(value) {
     if (!value) value = 0;
 
-    const x = this;
     const type = typeof value;
-    // if (!(x instanceof AsmdCalc)) return new AsmdCalc(value);
 
     if (value instanceof AsmdCalc) {
-      x.total = value.total;
+      this.total = value.total;
     } else if (type === 'number' || type === 'string') {
-      x.total = Number(value);
+      this.total = Number(value);
     } else {
       throw Error('[AsmdCalcError] Invalid argument: ' + value);
     }
 
-    return x;
+    return this;
   }
   /**
    * 加法

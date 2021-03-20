@@ -19,3 +19,4 @@ commitlint.config.js
 .editorconfig
 publish.bat
 .yarnrc
+.eslintrc.json
