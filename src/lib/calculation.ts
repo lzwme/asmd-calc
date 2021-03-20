@@ -2,7 +2,7 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2021-03-15 11:54:09
+ * @LastEditTime: 2021-03-20 10:50:47
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
@@ -32,7 +32,6 @@ export function toNonExponential(num: number): string {
   const strNum = String(num);
   if (strNum.indexOf('e') === -1) return strNum;
   const m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
-  // if (!m) return num.toExponential();
   return num.toFixed(Math.max(0, (m[1] || '').length - Number(m[2])));
 }
 
@@ -174,27 +173,24 @@ export function div(...args): number {
  * ```
  *
  * @param value 数值
- * @param len 小数位数
+ * @param precision 小数位数，应为 0-16 之间的整数
  * @param isrounding 是否四舍五入取值。默认 false
  */
-export function keepDotLength(value: number | string, len: number, isRounding = false): number {
+export function keepDotLength(value: number | string, precision: number, isRounding = false): number {
   if (isNull(value)) return null;
-  if (isNull(len) || (+len <= 0 && len !== 0)) return Number(value);
+  precision = Math.max(Number(precision), 0) || 0;
 
-  len = Number(len);
-
-  if (isRounding) return Number(toFixed(Number(value), len));
-  // if (isRounding) return Number(Number(value).toFixed(len));
+  if (isRounding) return Number(toFixed(Number(value), precision));
 
   let str = toNonExponential(Number(value));
 
-  if (str.indexOf('.') !== -1) str = str.substring(0, str.indexOf('.') + len + 1);
+  if (str.indexOf('.') !== -1) str = str.substring(0, str.indexOf('.') + precision + 1);
 
   return Number(str);
 }
 
 /**
- * toFixed 方法重写。 Number.toFixed 方法在不同浏览器表现不一致
+ * toFixed 方法重写 【解决 Number.toFixed 方法在不同浏览器表现不一致的问题】
  *
  * ### Example (es module)
  * ```js
@@ -210,33 +206,35 @@ export function keepDotLength(value: number | string, len: number, isRounding = 
  * ```
  *
  * @param value 数值
- * @param len 小数位数
+ * @param precision 小数位数，应为 0-16 之间的整数
  */
-export function toFixed(value: number | string, len: number): string {
+export function toFixed(value: number | string, precision: number): string {
   if (isNull(value)) return null;
-  value = Number(value);
-  if (isNull(len) || (+len <= 0 && len !== 0)) return String(value);
-  len = Number(len);
 
-  if (len === 0) return String(Math.round(value));
+  value = Number(value);
+  precision = Math.max(Number(precision), 0);
+  if (!precision) return String(Math.round(value));
 
   const valList = String(value).split('.');
 
   if (!valList[1]) {
-    valList[1] = new Array(len + 1).join('0');
+    valList[1] = new Array(precision + 1).join('0');
     return valList.join('.');
   } else {
-    let result = String(Math.round(Math.pow(10, len) * Number('0.' + valList[1])) / Math.pow(10, len));
+    const result = String(Math.round(Math.pow(10, precision) * Number('0.' + valList[1])) / Math.pow(10, precision)).split('.');
 
-    const tmp = result.split('.');
-    // 小数部分末尾补 0
-    if (tmp[1].length < len) {
-      tmp[1] += new Array(len - tmp[1].length + 1).join('0');
-      // tmp[1] = tmp[1].padEnd(len);
+    // result = 1，则没有小数部分
+    if (!result[1]) {
+      result[1] = '';
+      valList[0] = String(Number(valList[0]) + 1);
     }
-    tmp[0] = valList[0];
-    result = tmp.join('.');
 
-    return result;
+    // 小数部分末尾补 0
+    if (result[1].length < precision) {
+      result[1] += new Array(precision - result[1].length + 1).join('0');
+    }
+
+    valList[1] = result[1];
+    return valList.join('.');
   }
 }
