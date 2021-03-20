@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/lzwme/asmd-calc/compare/v1.1.0...v1.1.1) (2021-03-20)
+
+
+### Bug Fixes
+
+* 修复 toFixed 方法对于 9.99 存在进位后无小数位的情况会报错的问题 ([98c1197](https://github.com/lzwme/asmd-calc/commit/98c11972daf0b03f5f133975d35a5be04b5af61c))
+
 ## 1.1.0 (2021-03-15)
 
 
