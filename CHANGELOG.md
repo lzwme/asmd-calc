@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/lzwme/asmd-calc/compare/v1.1.1...v1.1.2) (2021-03-30)
+
+
+### Bug Fixes
+
+* 修复 toFixed 方法小数结果为 0 时返回值错误的问题 ([9fafac6](https://github.com/lzwme/asmd-calc/commit/9fafac6e6b75981808c16220b307d9e99cc71bcd))
+
 ### [1.1.1](https://github.com/lzwme/asmd-calc/compare/v1.1.0...v1.1.1) (2021-03-20)
 
 
