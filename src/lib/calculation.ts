@@ -2,7 +2,7 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2021-03-20 10:50:47
+ * @LastEditTime: 2021-03-30 17:01:57
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
@@ -226,7 +226,7 @@ export function toFixed(value: number | string, precision: number): string {
     // result = 1，则没有小数部分
     if (!result[1]) {
       result[1] = '';
-      valList[0] = String(Number(valList[0]) + 1);
+      valList[0] = String(Number(valList[0]) + Number(result[0]));
     }
 
     // 小数部分末尾补 0
