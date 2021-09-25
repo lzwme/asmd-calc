@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.1.5 (2021-09-25)
+
+
+### Bug Fixes
+
+* 修复 tofixed 在计算科学计算法表示的数据时异常([#6](https://github.com/lzwme/asmd-calc/issues/6)) ([834c156](https://github.com/lzwme/asmd-calc/commit/608a2a87193cb03fa310b3811f7caf46f73d8df8))
+
 ### [1.1.2](https://github.com/lzwme/asmd-calc/compare/v1.1.1...v1.1.2) (2021-03-30)
 
 

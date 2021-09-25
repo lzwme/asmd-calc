@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/lzwme/asmd-calc.git"
   },
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "支持浮点数精度的加减乘除四则运算 JS 库。",
   "main": "build/main/index.js",
   "browser": "build/main/index.js",
