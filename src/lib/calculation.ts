@@ -215,7 +215,7 @@ export function toFixed(value: number | string, precision: number): string {
   precision = Math.max(Number(precision), 0);
   if (!precision) return String(Math.round(value));
 
-  const valList = String(value).split('.');
+  const valList = toNonExponential(value).split('.');
 
   if (!valList[1]) {
     valList[1] = new Array(precision + 1).join('0');
