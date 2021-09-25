@@ -20,3 +20,4 @@ commitlint.config.js
 publish.bat
 .yarnrc
 .eslintrc.json
+CHANGELOG.md

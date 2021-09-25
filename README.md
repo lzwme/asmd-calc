@@ -1,4 +1,3 @@
-[![https://lzw.me](https://lzw.me/images/logo.png)](https://lzw.me)
 [![@lzwme/asmd-calc](https://nodei.co/npm/@lzwme/asmd-calc.png)][download-url]
 
 @lzwme/asmd-calc

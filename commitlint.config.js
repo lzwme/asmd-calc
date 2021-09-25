@@ -1,14 +1,19 @@
 /*
  * @Author: gflizhiwen
  * @Date: 2019-06-28 08:13:41
- * @LastEditors: gflizhiwen
- * @LastEditTime: 2019-10-21 16:42:50
+ * @LastEditors: lzw
+ * @LastEditTime: 2021-09-10 12:47:03
  * @Description: Git 提交规范 commitlint 校验配置
  * {@link http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html | 提交规范说明参考}
  */
 
 'use strict';
-const message = process.env['HUSKY_GIT_PARAMS'];
+let gitMsgPath = process.env['HUSKY_GIT_PARAMS'] || '.git/COMMIT_EDITMSG';
+
+const argv = process.argv.slice(2);
+const editIdx = argv.indexOf('--edit');
+if (editIdx > -1 && argv[editIdx + 1]) gitMsgPath = argv[editIdx + 1];
+
 const fs = require('fs');
 
 const types = [
@@ -41,7 +46,7 @@ function parseMessage(message) {
 }
 
 function getScopesRule() {
-  const messages = fs.readFileSync(message, { encoding: 'utf-8' });
+  const messages = fs.readFileSync(gitMsgPath, { encoding: 'utf-8' });
   const parsed = parseMessage(messages.split('\n')[0]);
   if (!parsed) {
     return [2, 'always', scopes];
