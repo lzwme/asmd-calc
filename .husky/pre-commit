@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# npx --no-install jest
+# npx --no-install eslint
+
+npm run lint -- --eslint --tscheck # --jest
+# yarn flh --eslint --tscheck --jest --only-changes

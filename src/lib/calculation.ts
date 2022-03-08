@@ -11,7 +11,7 @@
  * @param value
  */
 export function isNull(value): boolean {
-  return String(value) === 'NaN' || null === value || void 0 === value;
+  return null === value || void 0 === value || isNaN(value);
 }
 
 /**
@@ -176,7 +176,7 @@ export function div(...args): number {
  * @param precision 小数位数，应为 0-16 之间的整数
  * @param isrounding 是否四舍五入取值。默认 false
  */
-export function keepDotLength(value: number | string, precision: number, isRounding = false): number {
+export function keepDotLength(value: number | string, precision: number, isRounding = false): number | null {
   if (isNull(value)) return null;
   precision = Math.max(Number(precision), 0) || 0;
 
@@ -208,7 +208,7 @@ export function keepDotLength(value: number | string, precision: number, isRound
  * @param value 数值
  * @param precision 小数位数，应为 0-16 之间的整数
  */
-export function toFixed(value: number | string, precision: number): string {
+export function toFixed(value: number | string, precision: number): string | null {
   if (isNull(value)) return null;
 
   value = Number(value);

@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# npm run pipeline:commit-msg -- --edit $1
+yarn flh --jira --jira-type commit

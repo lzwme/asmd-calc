@@ -154,7 +154,7 @@ test('division 各种入参测试', (t) => {
     [12321, 111, 111],
     [101, '10.00', 10.1],
     [4.86111, 100, 0.0486111],
-  ];
+  ] as const;
 
   list.forEach((item) => {
     t.is(calc.div(item[0], item[1]), item[2]);
@@ -253,7 +253,7 @@ test('toFixed 各种入参测试', (t) => {
     [0.00001811, 3, '0.000'],
     [-0.00001811, 3, '0.000'],
     [0.000000000011, 3, '0.000'],
-  ];
+  ] as const;
 
   list.forEach((item) => {
     t.is(calc.toFixed(item[0], item[1] as number), null == item[2] ? item[2] : String(item[2]));
