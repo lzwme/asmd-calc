@@ -260,3 +260,11 @@ test('toFixed 各种入参测试', (t) => {
     t.is(calc.toFixed(item[0], item[1] as number), null == item[2] ? item[2] : String(item[2]));
   });
 });
+
+test('getDecimalLen', (t) => {
+  t.is(calc.getDecimalLen(10), 0);
+  t.is(calc.getDecimalLen(null), 0);
+  t.is(calc.getDecimalLen(1e-9), 9);
+  t.is(calc.getDecimalLen('abc'), 0);
+  t.is(calc.getDecimalLen('0.001'), 3);
+});

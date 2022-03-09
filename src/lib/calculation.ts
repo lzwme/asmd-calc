@@ -2,11 +2,12 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2022-03-09 13:33:53
+ * @LastEditTime: 2022-03-09 15:43:31
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
-function isDecimal(num): boolean {
+/** 是否为小数 */
+export function isDecimal(num): boolean {
   num = Number(num);
   return num && Math.ceil(num) !== Number(num);
 }
@@ -25,12 +26,7 @@ export function isNull(value): boolean {
  */
 export function getDecimalLen(num): number {
   if (!isDecimal(num)) return 0;
-
-  try {
-    return toNonExponential(num).split('.')[1].length;
-  } catch (f) {
-    return 0;
-  }
+  return toNonExponential(num).split('.')[1].length;
 }
 
 /** 将指定的浮点数转换为非科学计数法的字符串格式 */
@@ -62,8 +58,8 @@ export function add(...args): number {
     if (!value) return;
     if (!total) return (total = value);
 
-    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
-    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const tDLen = getDecimalLen(total);
+    const vDLen = getDecimalLen(value);
     const decimalLen = tDLen + vDLen;
 
     if (decimalLen) {
@@ -124,8 +120,8 @@ export function mul(...args): number {
     if (!value || !total) return (total = 0);
     if (1 === total) return (total = value);
 
-    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
-    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const tDLen = getDecimalLen(total);
+    const vDLen = getDecimalLen(value);
     const decimalLen = tDLen + vDLen;
 
     if (decimalLen) {
@@ -174,8 +170,8 @@ export function div(...args): number {
 
     value = Number(value);
 
-    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
-    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const tDLen = getDecimalLen(total);
+    const vDLen = getDecimalLen(value);
     const decimalLen = vDLen - tDLen;
 
     if (vDLen || tDLen) {
