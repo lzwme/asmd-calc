@@ -2,9 +2,14 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2021-03-30 17:01:57
+ * @LastEditTime: 2022-03-09 13:33:53
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
+
+function isDecimal(num): boolean {
+  num = Number(num);
+  return num && Math.ceil(num) !== Number(num);
+}
 
 /**
  * NaN、null、undefined 返回 true，其它为 false
@@ -19,6 +24,8 @@ export function isNull(value): boolean {
  * @param num
  */
 export function getDecimalLen(num): number {
+  if (!isDecimal(num)) return 0;
+
   try {
     return toNonExponential(num).split('.')[1].length;
   } catch (f) {
@@ -28,9 +35,10 @@ export function getDecimalLen(num): number {
 
 /** 将指定的浮点数转换为非科学计数法的字符串格式 */
 export function toNonExponential(num: number): string {
-  num = Number(num);
+  if (!num) return '0';
   const strNum = String(num);
   if (strNum.indexOf('e') === -1) return strNum;
+  num = Number(num);
   const m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
   return num.toFixed(Math.max(0, (m[1] || '').length - Number(m[2])));
 }
@@ -48,16 +56,22 @@ export function toNonExponential(num: number): string {
  * @returns 永远返回有效的数值，不存在 NaN(视作0处理)
  */
 export function add(...args): number {
-  let total = 0;
-  args.forEach((val) => {
-    if (!val) return;
-    if (!total) return (total = val);
+  let total = Number(args[0]);
 
-    const aDecimalLen = getDecimalLen(val);
-    const bDecimalLen = getDecimalLen(total);
-    const e = Math.pow(10, Math.max(aDecimalLen, bDecimalLen));
+  args.slice(1).forEach((value) => {
+    if (!value) return;
+    if (!total) return (total = value);
 
-    total = (mul(total, e) + mul(val, e)) / e;
+    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
+    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const decimalLen = tDLen + vDLen;
+
+    if (decimalLen) {
+      const e = Math.pow(10, Math.max(tDLen, vDLen));
+      total = (Math.round(total * e) + Math.round(value * e)) / e;
+    } else {
+      total += value;
+    }
   });
 
   return total;
@@ -78,8 +92,8 @@ export function add(...args): number {
  */
 export function sub(...args): number {
   if (!args.length) return null;
-  args.slice(1).forEach((val, idx) => {
-    if (val) args[idx + 1] = -val;
+  args.forEach((value, idx) => {
+    if (idx && value) args[idx] = -value;
   });
 
   return add(...args);
@@ -100,21 +114,28 @@ export function sub(...args): number {
  * @returns 永远返回有效的数值，不存在 NaN(视作0处理)
  */
 export function mul(...args): number {
-  let total = 1;
+  let total = Number(args[0]);
 
   if (!args.length) return 0;
 
-  args.forEach((value) => {
-    value = Number(value) || 0;
+  args.slice(1).forEach((value) => {
+    if (typeof value !== 'number') value = +value || 0;
+
     if (!value || !total) return (total = 0);
     if (1 === total) return (total = value);
 
-    const decimalLen = getDecimalLen(total) + getDecimalLen(value);
-    const e = Math.pow(10, decimalLen);
-    const aa = Number(toNonExponential(total).replace('.', ''));
-    const bb = Number(toNonExponential(value).replace('.', ''));
+    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
+    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const decimalLen = tDLen + vDLen;
 
-    total = (aa * bb) / e;
+    if (decimalLen) {
+      const e = Math.pow(10, decimalLen);
+      total = tDLen ? Math.round(total * Math.pow(10, tDLen)) : total; // Number(toNonExponential(total).replace('.', ''));
+      value = vDLen ? Math.round(value * Math.pow(10, vDLen)) : value; // Number(toNonExponential(value).replace('.', ''));
+      total = (total * value) / e;
+    } else {
+      total *= value;
+    }
   });
 
   return total;
@@ -142,18 +163,31 @@ export function mul(...args): number {
 export function div(...args): number {
   if (!args.length) return null;
 
-  let total = Number(args[0]) || 0;
+  let total: number = args[0];
 
   args.slice(1).forEach((value) => {
-    value = Number(value) || 0;
+    if (!value || !total) { // null \ NaN \ undefined
+      total /= value;
+      return;
+    }
 
-    const decimalLen = getDecimalLen(value) - getDecimalLen(total);
-    let e = Math.pow(10, decimalLen);
-    if (decimalLen < 0) e = Number(e.toFixed(-decimalLen));
+    value = Number(value);
 
-    const aa = Number(toNonExponential(total).replace('.', ''));
-    const bb = Number(toNonExponential(value).replace('.', ''));
-    total = e === 1 ? aa / bb : mul(aa / bb, e);
+    const tDLen = isDecimal(total) ? getDecimalLen(total) : 0;
+    const vDLen = isDecimal(value) ? getDecimalLen(value) : 0;
+    const decimalLen = vDLen - tDLen;
+
+    if (vDLen || tDLen) {
+      let e = Math.pow(10, decimalLen);
+      if (decimalLen < 0) e = Number(e.toFixed(-decimalLen));
+
+      total = tDLen ? Math.round(total * Math.pow(10, tDLen)) : total; // Number(toNonExponential(total).replace('.', ''));
+      value = vDLen ? Math.round(value * Math.pow(10, vDLen)) : value; // Number(toNonExponential(value).replace('.', ''));
+
+      total = mul(total / value, e);
+    } else {
+      total /= value;
+    }
   });
 
   return total;
@@ -163,12 +197,12 @@ export function div(...args): number {
  *
  * ### Example (es module)
  * ```js
- * import { keepDotLength } from 'asmd-calc';
- * console.log(keepDotLength(0.66666, 2));
+ * import { keepDotDLength } from 'asmd-calc';
+ * console.log(keepDotDLength(0.66666, 2));
  * // => 0.66
- * console.log(keepDotLength(0.66666, 2, false));
+ * console.log(keepDotDLength(0.66666, 2, false));
  * // => 0.66
- * console.log(keepDotLength(0.66666, 2, true));
+ * console.log(keepDotDLength(0.66666, 2, true));
  * // => 0.67
  * ```
  *

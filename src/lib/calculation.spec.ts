@@ -4,18 +4,18 @@ import * as calc from './calculation';
 
 test('toNonExponential 将指定的数值转换为非科学计数法的字符串格式', (t) => {
   const toNExpList = [
+    [0, '0'],
+    [null, '0'],
+    [NaN, '0'],
+    [void 0, '0'],
     [Infinity, 'Infinity'],
     [-Infinity, '-Infinity'],
-    [0, '0'],
     [100, '100'],
     [10e8, '1000000000'],
     [10e-10, '0.000000001'],
     [10.12e10, '101200000000'],
     [10.12e-10, '0.000000001012'],
     [-10.12e10, '-101200000000'],
-    [null, '0'],
-    [NaN, 'NaN'],
-    [void 0, 'NaN'],
   ];
 
   toNExpList.forEach((item) => {
@@ -116,6 +116,7 @@ test('multiplication 各种入参测试', (t) => {
     [1.11, 1.11, 1.2321],
     [111, 111, 12321],
     ['10.00', '10.1', 101],
+    [4.11011, 100000, 411011],
   ];
 
   list.forEach((item) => {
@@ -148,8 +149,8 @@ test('division 各种入参测试', (t) => {
     [6, 0, Infinity],
     [null, 3, 0],
     [1, null, Infinity],
-    [void 0, 3, 0],
-    [3, void 0, Infinity],
+    [void 0, 3, NaN],
+    [3, void 0, NaN],
     [1.2321, 1.11, 1.11],
     [12321, 111, 111],
     [101, '10.00', 10.1],
@@ -168,7 +169,7 @@ test('division 除法计算支持无限参数个数', (t) => {
     { param: [0.06, 3, 0.1, 0.2], value: 1 },
     { param: [0.0432, 3.6, 1, 2, 0.1, 0.2, 0.3], value: 1 },
     { param: [10.3, null, 1.1, 2.2, 3, 4], value: Infinity },
-    { param: [4.3, void 0, 1, 1, 1.2, 1.1], value: Infinity },
+    { param: [4.3, void 0, 1, 1, 1.2, 1.1], value: NaN },
     { param: [13.558479, 4.11, 1.1, 2.999], value: 1 },
     { param: [19.14, 3, 1.1, 290, 0.1, 0.2], value: 1 },
     { param: [6e-20, 3e-10, 2e-10], value: 1 },

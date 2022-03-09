@@ -38,8 +38,8 @@
 
 **不适用的情况：**
 
-- 对于涉及超大数等前端无法精确表示的数值处理，应当由后端语言计算并使用字符串方式返回给前端展示。
-- 对于较为复杂的数学科学计算需求，推荐使用开源库如 [math.js](https://mathjs.org/index.html)、[decimal.js](https://github.com/MikeMcl/decimal.js)、[calculatorjs](https://github.com/fzred/calculatorjs)、[bignumber.js](https://github.com/MikeMcl/bignumber.js)、[big.js/](https://github.com/MikeMcl/big.js/)等，具体可分别参见其官方文档。
+- 对于涉及超大数等`前端无法精确表示的数值处理`，建议由后端语言计算并使用字符串方式返回给前端展示。也可使用 `math.js` 等开源库以字符串形式执行计算。
+- 对于较为`复杂的数学科学计算`需求，推荐使用开源库如 [math.js](https://mathjs.org/index.html)、[decimal.js](https://github.com/MikeMcl/decimal.js)、[calculatorjs](https://github.com/fzred/calculatorjs)、[bignumber.js](https://github.com/MikeMcl/bignumber.js)、[big.js/](https://github.com/MikeMcl/big.js/)等，具体可分别参见其官方文档。
 
 ## 安装
 
@@ -48,8 +48,9 @@
 npm i @lzwme/asmd-calc
 # yarn
 yarn add @lzwme/asmd-calc
+# pnpm
+pnpm add @lzwme/asmd-calc
 ```
-
 
 ## 用法 (USEAGE)
 
@@ -79,7 +80,7 @@ console.log(calc.add(0.1, 0.2, 0.3));
 ```js
 const calc = require('@lzwme/asmd-calc');
 
-console.log(add(0.1, 0.2, 0.3));
+console.log(calc.add(0.1, 0.2, 0.3));
 // => 0.6
 ```
 
@@ -112,8 +113,8 @@ console.log(b.value);
 ```js
 const AsmdCalc = require('@lzwme/asmd-calc').AsmdCalc;
 
-const a = new AsmdCalc(0);
-console.log(a.add(0.1).add(0.2, 0.3));
+const calc = new AsmdCalc(0);
+console.log(calc.add(0.1).add(0.2, 0.3));
 // => 0.6
 ```
 
@@ -133,21 +134,42 @@ console.log(a.add(0.1).add(0.2, 0.3));
 - 开发
 
 ```bash
-yarn install
-yarn start
+pnpm install
+pnpm start
 ```
 
 - 测试
 
 ```bash
-yarn test
+# 单元测试
+npm test
+
+# 基准测试
+npm run benchmark
 ```
 
 - 构建
 
 ```bash
-yarn build
+npm run build
 ```
+
+## Benchmark
+
+```bash
+npm run benchmark
+```
+
+基准测试代码参见：[Benchmark](https://github.com/lzwme/asmd-calc/blob/master/benchmark/index.ts)
+
+以下结果为在同一机器上分别执行 `10000*N` 次的耗时对比：
+
+| type/times |   jsRaw  | asmd-calc |  mathjs   |
+|     ---    |   ---    |    ---    |    ---    |
+| add-10000  | 19.225ms | 169.535ms | 415.145ms |
+| sub-10000  | 16.269ms | 34.827ms  | 171.263ms |
+| mul-10000  | 18.518ms | 51.625ms  | 235.868ms |
+| div-10000  | 27.025ms | 79.504ms  | 300.706ms |
 
 ## 相关参考
 
