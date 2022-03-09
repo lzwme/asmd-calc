@@ -166,7 +166,8 @@ export function div(...args): number {
   let total: number = args[0];
 
   args.slice(1).forEach((value) => {
-    if (!value || !total) { // null \ NaN \ undefined
+    if (!value || !total) {
+      // null \ NaN \ undefined
       total /= value;
       return;
     }
