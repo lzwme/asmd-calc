@@ -13,10 +13,13 @@
   "license": "MIT",
   "keywords": [
     "calc",
+    "precision",
+    "number",
     "decimal",
+    "float",
+    "floating-point",
     "浮点数计算",
-    "浮点数精确计算",
-    "浮点数精确计算插件"
+    "浮点数精确计算"
   ],
   "scripts": {
     "start": "npm run watch",

@@ -1,24 +1,24 @@
 import * as asmdCalc from '../src/lib/calculation';
 
-function benchmark(desc: string, fn: () => unknown, times = 10000) {
-  // if (!fn) return;
+function benchmark(desc: string, fn: () => unknown, times = 10_000) {
+  // 预执行 N 次
+  let preTimes = 100_000;
+  while (preTimes--) fn();
 
   const startTime = Date.now();
   const label = `benchmark-${desc}-${times}`;
-  console.time(label);
 
-  while (times--) {
-    fn();
-  }
+  console.time(label);
+  while (times--) fn();
+  console.timeEnd(label);
 
   const timeCost = Date.now() - startTime;
-  console.timeEnd(label);
   // console.log(label, ':', timeCost, 'ms');
 
   return timeCost;
 }
 
-export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: string, times = 10000) {
+export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: string, times = 10_000) {
   let fns = {
     add: () => {
       const list = [
