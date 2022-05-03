@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+pnpm exec flh --eslint --tscheck --only-changes # --fix
 yarn lint-staged
