@@ -30,8 +30,6 @@
 
 A short and concise JavaScript library for the four fundamental operations of arithmetic, which supports the addition, subtraction, multiplication and division calculation of floating-point precision.
 
-提供常见的加(`add`)、减(`sub`)、乘(`mul`)、除(`div`)计算方法，可满足涉及金额、价格处理等前端数据计算的大多数应用场景。
-
 ## Features
 
 - Short and sharp. It only includes the calculation of addition, subtraction, multiplication and division. The core code is less than 100 lines. There is no other dependency.
@@ -51,7 +49,7 @@ These libraries are recommended:
 - [bignumber.js](https://github.com/MikeMcl/bignumber.js)
 - [big.js/](https://github.com/MikeMcl/big.js/)。
 
-## 安装
+## Install
 
 ```bash
 # npm
@@ -62,7 +60,7 @@ yarn add @lzwme/asmd-calc
 pnpm add @lzwme/asmd-calc
 ```
 
-## USEAGE
+## Useage
 
 ### 1. Calculation example using simple tool method
 
@@ -126,7 +124,7 @@ console.log(calc.add(0.1).add(0.2, 0.3));
 - `mul(...args);` - Multiplication
 - `div(...args);` - Division
 - `keepDotLength(value, len, isRounding = false): number;` - Keep N decimal places
-- `toFixed(value, len): string;` - 保留 N 位小数(四舍五入，返回字符串)
+- `toFixed(value, len): string;` - Similar to `Number.prototype.toFixed`, but fixed precision of the result
 - `getDecimalLen(num): number;` - Get the decimal length
 - `toNonExponential(num): string;` - Convert to string format of unscientific counting method
 
@@ -178,9 +176,12 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 | mul-10000  | 9.995ms  | 35.685ms  | 224.357ms |
 | div-10000  | 15.666ms | 77.407ms  | 280.322ms |
 
-## Reference
+## References
 
+- [754-2008 – IEEE Standard for Floating-Point Arithmetic](https://ieeexplore.ieee.org/document/4610935)
+- [Floating Point Math – https://0.30000000000000004.com](https://0.30000000000000004.com)
 - [确保前端 JavaScript 浮点数精度的四则运算方法](https://lzw.me/a/javascript-floating-point-arithmetic.html)
+
 ## License
 
 `@lzwme/asmd-calc` is released under the MIT license.
