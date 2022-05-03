@@ -28,6 +28,8 @@
 [bundlephobia-url]: https://bundlephobia.com/result?p=@lzwme/asmd-calc@latest
 [bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/@lzwme/asmd-calc@latest
 
+[简体中文](./.github/README-zh-CN.md)
+
 A short and concise JavaScript library for the four fundamental operations of arithmetic, which supports the addition, subtraction, multiplication and division calculation of floating-point precision.
 
 ## Features

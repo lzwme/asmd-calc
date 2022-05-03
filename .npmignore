@@ -4,8 +4,10 @@ src
 test
 test-cases
 scripts
-README_zh-CN.MD
+README_zh-CN.md
+CHANGELOG.md
 LICENSE
+benchmark
 
 # build dist
 build/docs
@@ -28,9 +30,7 @@ publish.bat
 .vscode
 .husky
 .circleci
-tsconfig.json
-tsconfig.module.json
-tsconfig.eslint.json
+tsconfig.*
 jest.config.*
 .travis.yml
 .gitlab-ci.yml
