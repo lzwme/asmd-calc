@@ -42,8 +42,8 @@
     "cov": "jest --coverage --silent",
     "cov:html": "jest --coverage --silent --reporter=html",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts --out build/docs",
-    "doc:json": "typedoc src/ --exclude **/*.spec.ts --json build/docs/typedoc.json",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --out build/docs --tsconfig tsconfig.module.json",
+    "doc:json": "typedoc src/ --exclude **/*.spec.ts --json build/docs/typedoc.json --tsconfig tsconfig.module.json",
     "version": "standard-version",
     "clean": "trash build",
     "dist": "run-s build doc:html",
@@ -92,7 +92,6 @@
     "build/*",
     "!src/*",
     "!**/*.json",
-    "LICENSE",
     "README.md"
   ],
   "prettier": {

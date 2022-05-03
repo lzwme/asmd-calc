@@ -5,6 +5,7 @@ test
 test-cases
 scripts
 README_zh-CN.MD
+LICENSE
 
 # build dist
 build/docs

@@ -28,28 +28,20 @@
 [bundlephobia-url]: https://bundlephobia.com/result?p=@lzwme/asmd-calc@latest
 [bundlephobia-badge]: https://badgen.net/bundlephobia/minzip/@lzwme/asmd-calc@latest
 
-A short and concise JavaScript library for the four fundamental operations of arithmetic, which supports the addition, subtraction, multiplication and division calculation of floating-point precision.
+一个短小精悍的四则运算 JS 工具方法库，支持浮点数精度的加减乘除计算。
 
 提供常见的加(`add`)、减(`sub`)、乘(`mul`)、除(`div`)计算方法，可满足涉及金额、价格处理等前端数据计算的大多数应用场景。
 
-## Features
+**为什么选用 `asmd-calc`：**
 
-- Short and sharp. It only includes the calculation of addition, subtraction, multiplication and division. The core code is less than 100 lines. There is no other dependency.
-- High execution performance. Only the four operations that can be accurately expressed by the front end are considered to realize simple logic and better execution performance than the open source library with rich and complex functions (see `Benchmark` for details).
-- Accurate and stable. The accumulation of many years of practical experience in the development of several financial trading systems covers various common calculation use case error scenarios.
+- 短小精悍。仅包含加减乘除计算，核心代码不足百行，无其他依赖，文件小巧够用
+- 执行性能高。仅考虑前端可精确表达的四则运算，实现逻辑简洁，执行性能优于功能丰富复杂的开源库(详见 Benchmark 部分)
+- 准确稳定。数个金融类交易系统多年开发实践经验的积累，覆盖了常见的各种计算用例误差场景
 
-**Not Applicable**
+**不适用的情况：**
 
-- For numerical processing involving very large numbers that front-end can not be accurately represented.
-- Complex mathematical scientific calculation. 
-
-These libraries are recommended:
-
-- [math.js](https://mathjs.org/index.html)
-- [decimal.js](https://github.com/MikeMcl/decimal.js)
-- [calculatorjs](https://github.com/fzred/calculatorjs)
-- [bignumber.js](https://github.com/MikeMcl/bignumber.js)
-- [big.js/](https://github.com/MikeMcl/big.js/)。
+- 对于涉及超大数等`前端无法精确表示的数值处理`，建议由后端语言计算并使用字符串方式返回给前端展示。也可使用 `math.js` 等开源库以字符串形式执行计算。
+- 对于较为`复杂的数学科学计算`需求，推荐使用开源库如 [math.js](https://mathjs.org/index.html)、[decimal.js](https://github.com/MikeMcl/decimal.js)、[calculatorjs](https://github.com/fzred/calculatorjs)、[bignumber.js](https://github.com/MikeMcl/bignumber.js)、[big.js/](https://github.com/MikeMcl/big.js/)等，具体可分别参见其官方文档。
 
 ## 安装
 
@@ -62,9 +54,9 @@ yarn add @lzwme/asmd-calc
 pnpm add @lzwme/asmd-calc
 ```
 
-## USEAGE
+## 用法 (USEAGE)
 
-### 1. Calculation example using simple tool method
+### 1. 使用简单的工具方法计算示例
 
 #### es module
 
@@ -72,6 +64,15 @@ pnpm add @lzwme/asmd-calc
 import { add } from '@lzwme/asmd-calc';
 
 console.log(add(0.1, 0.2, 0.3));
+// => 0.6
+```
+
+或
+
+```js
+import * as calc from '@lzwme/asmd-calc';
+
+console.log(calc.add(0.1, 0.2, 0.3));
 // => 0.6
 ```
 
@@ -85,7 +86,7 @@ console.log(calc.add(0.1, 0.2, 0.3));
 // => 0.6
 ```
 
-### 2. Calculation example using chain operation
+### 2. 使用链式操作类计算示例
 
 #### es module
 
@@ -121,32 +122,35 @@ console.log(calc.add(0.1).add(0.2, 0.3));
 
 ## API
 
-- `add(...args);` - Addition
-- `sub(...args);` - Subtraction
-- `mul(...args);` - Multiplication
-- `div(...args);` - Division
-- `keepDotLength(value, len, isRounding = false): number;` - Keep N decimal places
-- `toFixed(value, len): string;` - 保留 N 位小数(四舍五入，返回字符串)
-- `getDecimalLen(num): number;` - Get the decimal length
-- `toNonExponential(num): string;` - Convert to string format of unscientific counting method
+- `add(...args)` 加法运算
+- `sub(...args)` 减法运算
+- `mul(...args)` 乘法运算
+- `div(...args)` 除法运算
+- `keepDotLength(value, len, isRounding = false)` 保留 N 位小数(支持四舍五入或截断)
+- `toFixed(value, len)` 保留 N 位小数(四舍五入，返回字符串)
+- `getDecimalLen(num)` 获取指定数值的小数位长度
+- `toNonExponential(num)` 将指定的浮点数转换为非科学计数法的字符串格式
 
-## Development and testing
+## 开发与测试
 
-- Development
+- 开发
 
 ```bash
 pnpm install
 pnpm start
 ```
 
-- Testing
+- 测试
 
 ```bash
+# 单元测试
 npm test
+
+# 基准测试
 npm run benchmark
 ```
 
-- Build
+- 构建
 
 ```bash
 npm run build
@@ -158,9 +162,9 @@ npm run build
 npm run benchmark
 ```
 
-See：[Benchmark](https://github.com/lzwme/asmd-calc/blob/master/benchmark/index.ts)
+基准测试代码参见：[Benchmark](https://github.com/lzwme/asmd-calc/blob/master/benchmark/index.ts)
 
-The following results are the time-consuming comparison of executing `10000 * N` times on the same machine:
+以下结果为在同一机器上分别执行 `10000*N` 次的耗时对比：
 
 | type/times |   jsRaw  | asmd-calc |  mathjs   |
 |     ---    |   ---    |    ---    |    ---    |
@@ -169,7 +173,7 @@ The following results are the time-consuming comparison of executing `10000 * N`
 | mul-10000  | 18.518ms | 51.625ms  | 235.868ms |
 | div-10000  | 27.025ms | 79.504ms  | 300.706ms |
 
-Pre execution of 1000000 times and then stats time-consuming of execution of `10000 * N` times:
+预执行 `100_000` 次后再执行 `10000*N` 次的耗时对比：
 
 | type/times |   jsRaw  | asmd-calc |  mathjs   |
 |     ---    |   ---    |    ---    |    ---    |
@@ -178,7 +182,7 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 | mul-10000  | 9.995ms  | 35.685ms  | 224.357ms |
 | div-10000  | 15.666ms | 77.407ms  | 280.322ms |
 
-## Reference
+## 相关参考
 
 - [确保前端 JavaScript 浮点数精度的四则运算方法](https://lzw.me/a/javascript-floating-point-arithmetic.html)
 ## License
