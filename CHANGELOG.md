@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/lzwme/asmd-calc/compare/v1.1.5...v1.3.0) (2022-05-03)
+
+
+### Features
+
+* 重构部分逻辑实现，改善执行性能，并增加 benchmark 基准测试 ([c6c5918](https://github.com/lzwme/asmd-calc/commit/c6c591872c34b739616f55ccdbf08f169008c886))
+
 ## [1.2.0](https://github.com/lzwme/asmd-calc/compare/v1.1.5...v1.2.0) (2022-03-09)
 
 
