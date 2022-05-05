@@ -1,6 +1,6 @@
 {
   "name": "@lzwme/asmd-calc",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "支持浮点数精度的加减乘除四则运算 JS 库。",
   "main": "build/main/index.js",
   "browser": "build/main/index.js",
@@ -46,8 +46,8 @@
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --json build/docs/typedoc.json --tsconfig tsconfig.module.json",
     "version": "standard-version",
     "clean": "trash build",
-    "dist": "run-s build doc:html",
-    "release": "run-s test dist version",
+    "release": "run-s build doc:html",
+    "release-version": "run-s test release version",
     "benchmark": "ts-node benchmark/index.ts"
   },
   "engines": {
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@jest/core": "^27",
-    "@lzwme/fed-lint-helper": "^1.5.1",
+    "@lzwme/fed-lint-helper": "^1.6.0",
     "@swc/core": "^1.2.174",
     "@swc/jest": "^0.2.20",
     "@types/eslint": "^8.4.1",

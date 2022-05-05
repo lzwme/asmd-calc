@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/lzwme/asmd-calc/compare/v1.3.0...v1.3.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* fix for types dir name ([c8518d0](https://github.com/lzwme/asmd-calc/commit/c8518d08dd68b35f1ea68081f2461dddb67ea912))
+
 ## [1.3.0](https://github.com/lzwme/asmd-calc/compare/v1.1.5...v1.3.0) (2022-05-03)
 
 
