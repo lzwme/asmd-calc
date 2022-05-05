@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "build/type",
+    "declarationDir": "build/types",
     "emitDeclarationOnly": false,
     "outDir": "build/module",
     "target": "esnext",
