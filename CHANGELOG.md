@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/lzwme/asmd-calc/compare/v1.3.1...v1.3.2) (2022-05-09)
+
+
+### Bug Fixes
+
+* fix for husky install scripts ([e4da474](https://github.com/lzwme/asmd-calc/commit/e4da474d056342726eb5f2845b896e76a26ecdee))
+
 ### [1.3.1](https://github.com/lzwme/asmd-calc/compare/v1.3.0...v1.3.1) (2022-05-05)
 
 
