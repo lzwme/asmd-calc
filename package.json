@@ -25,6 +25,7 @@
     "浮点数精确计算"
   ],
   "scripts": {
+    "prepare": "husky install",
     "start": "npm run watch",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.cjs.json",
