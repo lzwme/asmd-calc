@@ -2,14 +2,14 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2022-03-09 15:43:31
+ * @LastEditTime: 2022-05-30 11:03:41
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
 /** 是否为小数 */
-export function isDecimal(num): boolean {
-  num = Number(num);
-  return num && Math.ceil(num) !== Number(num);
+export function isDecimal(n): boolean {
+  n = Number(n);
+  return !isNaN(n) && Math.ceil(n) !== n;
 }
 
 /**
@@ -17,7 +17,7 @@ export function isDecimal(num): boolean {
  * @param value
  */
 export function isNull(value): boolean {
-  return null === value || void 0 === value || isNaN(value);
+  return null == value || isNaN(value);
 }
 
 /**
