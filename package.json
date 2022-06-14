@@ -5,7 +5,7 @@
   "main": "build/main/index.js",
   "browser": "build/main/index.js",
   "module": "build/module/index.js",
-  "typings": "build/types/index.d.ts",
+  "typings": "build/main/index.d.ts",
   "private": false,
   "license": "MIT",
   "repository": "https://github.com/lzwme/asmd-calc.git",
