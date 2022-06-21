@@ -2,10 +2,9 @@
  * @Author: lzw
  * @Date: 2021-03-12 12:37:12
  * @LastEditors: lzw
- * @LastEditTime: 2022-03-09 12:43:50
+ * @LastEditTime: 2022-06-21 22:11:22
  * @Description: 基于 math.js 的加减乘除基本运算
  */
-// /* eslint-disable no-extend-native */
 
 import { bignumber, chain } from 'mathjs';
 
@@ -60,22 +59,18 @@ export function largerEq(a: ArgsMutiItem, b: ArgsMutiItem) {
   return chain(bignumber(a)).largerEq(bignumber(b)).done();
 }
 
-// @ts-expect-error
-Number.prototype.div = function (...args: ArgsMuti) {
-  return div(this.valueOf(), ...args);
-};
+// Number.prototype.div = function (...args: ArgsMuti) {
+//   return div(this.valueOf(), ...args);
+// };
 
-// @ts-expect-error
-Number.prototype.mul = function (...args: ArgsMuti) {
-  return mul(this.valueOf(), ...args);
-};
+// Number.prototype.mul = function (...args: ArgsMuti) {
+//   return mul(this.valueOf(), ...args);
+// };
 
-// @ts-expect-error
-Number.prototype.add = function (...args: ArgsMuti) {
-  return add(this.valueOf(), ...args);
-};
+// Number.prototype.add = function (...args: ArgsMuti) {
+//   return add(this.valueOf(), ...args);
+// };
 
-// @ts-expect-error
-Number.prototype.sub = function (...args: ArgsMuti) {
-  return sub(this.valueOf(), ...args);
-};
+// Number.prototype.sub = function (...args: ArgsMuti) {
+//   return sub(this.valueOf(), ...args);
+// };
