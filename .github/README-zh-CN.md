@@ -34,7 +34,7 @@
 # npm
 npm i @lzwme/asmd-calc
 # yarn
-yarn add @lzwme/asmd-calc
+pnpm add @lzwme/asmd-calc
 # pnpm
 pnpm add @lzwme/asmd-calc
 ```
@@ -166,6 +166,36 @@ npm run benchmark
 | sub-10000  | 8.339ms  | 25.147ms  | 155.611ms |
 | mul-10000  | 9.995ms  | 35.685ms  | 224.357ms |
 | div-10000  | 15.666ms | 77.407ms  | 280.322ms |
+
+### Benchmark Details
+
+随机数据集（测试用例）:
+
+| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+|     ---    |   ---    |    ---    |    ---    |    ---    |
+| add-10000 | 4.973ms | 144.934ms | 192.637ms | 363.513ms |
+| sub-10000 | 6.971ms | 21.84ms | 65.373ms | 165.045ms |
+| mul-10000 | 8.45ms | 36.014ms | 107.898ms | 223.708ms |
+| div-10000 | 14.427ms | 64.409ms | 154.766ms | 290.645ms |
+
+纯小数数据集:
+
+| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+|     ---    |   ---    |    ---    |    ---    |    ---    |
+| add-10000 | 0.248ms | 16.958ms | 30.875ms | 55.538ms |
+| sub-10000 | 0.462ms | 22.529ms | 32.719ms | 46.321ms |
+| mul-10000 | 0.232ms | 18.006ms | 34.765ms | 46.195ms |
+| div-10000 | 0.519ms | 17.37ms | 36.031ms | 47.271ms |
+
+纯整数数据集:
+
+| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+|     ---    |   ---    |    ---    |    ---    |    ---    |
+| add-10000 | 0.172ms | 0.681ms | 10.248ms | 35.004ms |
+| sub-10000 | 0.816ms | 1.069ms | 12.736ms | 32.836ms |
+| mul-10000 | 0.178ms | 0.733ms | 13.827ms | 33.486ms |
+| div-10000 | 0.488ms | 0.699ms | 19.847ms | 42.217ms |
+
 
 ## 相关参考
 

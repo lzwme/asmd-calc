@@ -1,4 +1,3 @@
-// tslint:disable:no-expression-statement
 import * as calc from '../lib/calculation';
 describe('calc', () => {
   it('toNonExponential 将指定的数值转换为非科学计数法的字符串格式', () => {
