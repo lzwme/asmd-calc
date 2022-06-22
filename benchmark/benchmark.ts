@@ -5,14 +5,14 @@ function benchmark(desc: string, fn: () => unknown, times = 10_000) {
   let preTimes = 100_000;
   while (preTimes--) fn();
 
-  const startTime = Date.now();
+  const startTime = process.hrtime.bigint();
   const label = `benchmark-${desc}-${times}`;
 
   console.time(label);
   while (times--) fn();
   console.timeEnd(label);
 
-  const timeCost = Date.now() - startTime;
+  const timeCost = Number(process.hrtime.bigint() - startTime) / 1_000_000;
   // console.log(label, ':', timeCost, 'ms');
 
   return timeCost;
@@ -34,7 +34,7 @@ export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: 
       list.forEach((item) => {
         calc.add(...item.param);
       });
-     },
+    },
     sub: () => {
       const list = [
         [3, 2, 1],
@@ -49,7 +49,7 @@ export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: 
       list.forEach((item) => {
         calc.sub(item[0], item[1]);
       });
-     },
+    },
     mul: () => {
       const list = [
         [3, 2, 6],
@@ -66,7 +66,7 @@ export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: 
       list.forEach((item) => {
         calc.mul(item[0], item[1]);
       });
-     },
+    },
     div: () => {
       const list = [
         [0, 0, NaN],
@@ -85,31 +85,55 @@ export function benchmarkStart(calc: Partial<typeof asmdCalc> = asmdCalc, desc: 
       list.forEach((item) => {
         calc.div(item[0], item[1]);
       });
-    }
+    },
+  };
+  const result = {
+    random: {} as Record<string, number>,
+    decimal: {} as Record<string, number>,
+    integer: {} as Record<string, number>,
+    times,
   };
 
   console.log(`[${desc}]benchmark:`);
-  for (const type in fns) benchmark(`${desc}-${type}`, fns[type], times);
+  for (const type in fns) result.random[type] = benchmark(`${desc}-${type}`, fns[type], times);
   console.log();
 
   fns = {
-    add: () => { calc.add(0.1, 0.2, 0.3) },
-    sub: () => { calc.sub(0.3, 0.2, 0.1) },
-    mul: () => { calc.mul(0.1, 0.2, 0.3) },
-    div: () => { calc.div(0.6, 0.1, 0.2) },
+    add: () => {
+      calc.add(0.1, 0.2, 0.3);
+    },
+    sub: () => {
+      calc.sub(0.3, 0.2, 0.1);
+    },
+    mul: () => {
+      calc.mul(0.1, 0.2, 0.3);
+    },
+    div: () => {
+      calc.div(0.6, 0.1, 0.2);
+    },
   };
   console.log(`[${desc}]benchmark-decimal:`);
-  for (const type in fns) benchmark(`${desc}-${type}`, fns[type], times);
+  for (const type in fns) result.decimal[type] = benchmark(`${desc}-${type}`, fns[type], times);
   console.log();
 
   fns = {
-    add: () => { calc.add(100, 200, 300) },
-    sub: () => { calc.sub(300, 200, 100) },
-    mul: () => { calc.mul(100, 200, 300) },
-    div: () => { calc.div(600, 100, 200) },
+    add: () => {
+      calc.add(100, 200, 300);
+    },
+    sub: () => {
+      calc.sub(300, 200, 100);
+    },
+    mul: () => {
+      calc.mul(100, 200, 300);
+    },
+    div: () => {
+      calc.div(600, 100, 200);
+    },
   };
 
   console.log(`[${desc}]benchmark-integer:`);
-  for (const type in fns) benchmark(`${desc}-${type}`, fns[type], times);
+  for (const type in fns) result.integer[type] = benchmark(`${desc}-${type}`, fns[type], times);
   console.log();
+
+  return result;
 }

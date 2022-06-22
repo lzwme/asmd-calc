@@ -1,7 +1,8 @@
 import { Decimal } from 'decimal.js';
 
 function fixInputValue(value) {
-  return Number.isNaN(value) || value === '' || value === '-' ? 0 : value ?? 0;
+  // return Number.isNaN(value) || value === '-' || !value ? 0 : value;
+  return Number.isNaN(value) || value === '' || value === '-' || !value ? 0 : value ?? 0;
 }
 
 export function Deci(value?: number | string | Decimal) {
@@ -11,7 +12,7 @@ export function Deci(value?: number | string | Decimal) {
 export { Decimal };
 
 type FuncType = 'add' | 'div' | 'mul' | 'sub' | 'mod';
-type ArgsMutiItem = number | string;
+type ArgsMutiItem = number | string | Decimal;
 type ArgsMuti = ArgsMutiItem[];
 
 function calc(funcType: FuncType, args: ArgsMuti) {
@@ -47,7 +48,7 @@ export function mod(...args: ArgsMuti) {
   return calc('mod', args);
 }
 export function toFixed(x: number, n: number) {
-  return Deci(x).toFixed(n);
+  return Deci(x).toFixed(fixInputValue(n));
 }
 
 /** 小于 */
