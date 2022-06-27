@@ -20,7 +20,7 @@ function doBenchmark() {
 
   testTypes.forEach((type) => {
     console.log(`\n\`${type}-${result.jsRaw.times}times\`:\n`);
-    console.log('| type/timeConst |', Object.keys(result).join(' | '), ' |');
+    console.log('| type/time |', Object.keys(result).join(' | '), ' |');
     console.log(`| --- |    ---    |    ---    |    ---    |    ---    |`);
     ['add', 'sub', 'mul', 'div'].forEach((key) => {
       console.log(

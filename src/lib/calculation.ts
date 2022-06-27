@@ -2,42 +2,11 @@
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
  * @LastEditors: lzw
- * @LastEditTime: 2022-05-30 11:03:41
+ * @LastEditTime: 2022-06-27 10:37:13
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
-/** 是否为小数 */
-export function isDecimal(n): boolean {
-  n = Number(n);
-  return !isNaN(n) && Math.ceil(n) !== n;
-}
-
-/**
- * NaN、null、undefined 返回 true，其它为 false
- * @param value
- */
-export function isNull(value): boolean {
-  return null == value || isNaN(value);
-}
-
-/**
- * 获取指定数值的小数位长度
- * @param num
- */
-export function getDecimalLen(num): number {
-  if (!isDecimal(num)) return 0;
-  return toNonExponential(num).split('.')[1].length;
-}
-
-/** 将指定的浮点数转换为非科学计数法的字符串格式 */
-export function toNonExponential(num: number): string {
-  if (!num) return '0';
-  const strNum = String(num);
-  if (strNum.indexOf('e') === -1) return strNum;
-  num = Number(num);
-  const m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
-  return num.toFixed(Math.max(0, (m[1] || '').length - Number(m[2])));
-}
+import { getDecimalLen, isNull, toNonExponential } from './utils';
 
 /**
  * addition 加法计算。与普通加法运算不同的是，任意参数为 `null/NaN/undefined`，均会被视为 `0` 而忽略

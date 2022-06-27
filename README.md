@@ -147,7 +147,7 @@ See：[Benchmark](https://github.com/lzwme/asmd-calc/blob/master/benchmark/index
 
 The following results are the time-consuming comparison of executing `10000 * N` times on the same machine:
 
-| type/times |   jsRaw  | asmd-calc |  mathjs   |
+| type/timeConst |   jsRaw  | asmd-calc |  mathjs   |
 |     ---    |   ---    |    ---    |    ---    |
 | add-10000  | 19.225ms | 169.535ms | 415.145ms |
 | sub-10000  | 16.269ms | 34.827ms  | 171.263ms |
@@ -156,7 +156,7 @@ The following results are the time-consuming comparison of executing `10000 * N`
 
 Pre execution of 1000000 times and then stats time-consuming of execution of `10000 * N` times:
 
-| type/times |   jsRaw  | asmd-calc |  mathjs   |
+| type/timeConst |   jsRaw  | asmd-calc |  mathjs   |
 |     ---    |   ---    |    ---    |    ---    |
 | add-10000  | 7.768ms  | 155.836ms | 362.819ms |
 | sub-10000  | 8.339ms  | 25.147ms  | 155.611ms |
@@ -167,7 +167,7 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 
 `random`:
 
-| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
 |     ---    |   ---    |    ---    |    ---    |    ---    |
 | add-10000 | 4.973ms | 144.934ms | 192.637ms | 363.513ms |
 | sub-10000 | 6.971ms | 21.84ms | 65.373ms | 165.045ms |
@@ -176,7 +176,7 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 
 `decimal`:
 
-| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
 |     ---    |   ---    |    ---    |    ---    |    ---    |
 | add-10000 | 0.248ms | 16.958ms | 30.875ms | 55.538ms |
 | sub-10000 | 0.462ms | 22.529ms | 32.719ms | 46.321ms |
@@ -185,7 +185,7 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 
 `integer`:
 
-| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
 |     ---    |   ---    |    ---    |    ---    |    ---    |
 | add-10000 | 0.172ms | 0.681ms | 10.248ms | 35.004ms |
 | sub-10000 | 0.816ms | 1.069ms | 12.736ms | 32.836ms |

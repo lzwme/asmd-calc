@@ -9,6 +9,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
 
     /* Debugging Options */
     "traceResolution": false,

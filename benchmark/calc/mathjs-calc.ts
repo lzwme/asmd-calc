@@ -2,7 +2,7 @@
  * @Author: lzw
  * @Date: 2021-03-12 12:37:12
  * @LastEditors: lzw
- * @LastEditTime: 2022-06-21 22:11:22
+ * @LastEditTime: 2022-06-23 16:52:15
  * @Description: 基于 math.js 的加减乘除基本运算
  */
 
@@ -19,7 +19,7 @@ function calc(funcType: FuncType, args: ArgsMuti) {
     valChain = valChain[funcType](bignumber(+arg));
   });
 
-  return parseFloat(valChain.done());
+  return +valChain.done();
 }
 
 /** 加法 */

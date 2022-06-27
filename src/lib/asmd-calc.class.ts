@@ -1,5 +1,6 @@
 // tslint:disable:typedef
-import { add, div, keepDotLength, mul, sub, toFixed, toNonExponential } from './calculation';
+import { add, div, keepDotLength, mul, sub, toFixed } from './calculation';
+import { toNonExponential } from './utils';
 
 /**
  * 支持浮点数四则运算的链式操作类

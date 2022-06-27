@@ -22,8 +22,6 @@ function calc(funcType: FuncType, args: ArgsMuti) {
     valChain = valChain[funcType](fixInputValue(arg));
   });
 
-  valChain.lessThan;
-
   return valChain.toNumber();
 }
 
