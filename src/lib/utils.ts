@@ -1,10 +1,3 @@
-export const REG = {
-  // isBinary: /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i,
-  // isHex: /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i,
-  // isOctal: /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i,
-  isDecimal: /^-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
-};
-
 /**
  * 获取指定数值的小数位长度
  * @param num
@@ -24,11 +17,9 @@ export function getDecimalLen(num): number {
  * @param n 要识别的参数
  * @param useRegExp 是否使用正则方式。默认为 false
  */
-export function isDecimal(n, useRegExp = false): boolean {
-  if (useRegExp) return REG.isDecimal.test(n);
-
-  n = Number(n);
-  return !isNaN(n) && Math.ceil(n) !== n;
+export function isDecimal(value: number | string): boolean {
+  const n = Number(value);
+  return !Number.isNaN(n) && Math.ceil(n) !== n;
 }
 
 /**

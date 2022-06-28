@@ -25,19 +25,12 @@ describe('calc', () => {
   it('isDecimal', () => {
     const decimalList = ['0.00000001012', '100.1', 100.1, 0.0001, -0.1, -100.01, 0.3 - 0.2];
     const aList = [100, 'a', 'bbb', 0, void 0, null, 0, NaN, '', 10001];
-    const caseList = [...decimalList, aList];
 
     decimalList.forEach((val) => {
       expect(isDecimal(val)).toBeTruthy();
     });
     aList.forEach((val) => {
       expect(isDecimal(val)).toBeFalsy();
-    });
-
-    caseList.forEach((val) => {
-      const ok = isDecimal(val, false) === isDecimal(val, true);
-      if (!ok) console.error(val, isDecimal(val, false), isDecimal(val, true));
-      expect(ok).toBeTruthy();
     });
   });
 
