@@ -25,7 +25,7 @@ const config = {
   testMatch: ['<rootDir>/src/__test__/*.spec.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', 'src/cli.ts', 'src/index.ts', 'src/__test__'],
   collectCoverageFrom: ['src/**/!(*.d).ts'],
-  maxWorkers: require('os').cpus().length,
+  // maxWorkers: require('os').cpus().length,
   // watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };
 // module.exports = config;

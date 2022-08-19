@@ -49,42 +49,39 @@
     "watch:test": "jest --watch",
     "cov": "jest --coverage --silent",
     "cov:html": "jest --coverage --silent --reporter=html",
-    "doc": "run-s doc:html && open-cli build/docs/index.html",
+    "doc": "run-s doc:html",
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --out build/docs --tsconfig tsconfig.module.json",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --json build/docs/typedoc.json --tsconfig tsconfig.module.json",
     "version": "standard-version",
-    "clean": "trash build",
+    "clean": "flh rm -f build",
     "release": "run-s build doc:html",
     "release-version": "run-s test release version",
-    "benchmark": "ts-node benchmark/index.ts"
+    "benchmark": "ts-node -T benchmark/index.ts"
   },
   "devDependencies": {
     "@jest/core": "^28",
     "@lzwme/fed-lint-helper": "^1.12.3",
-    "@swc/core": "^1.2.233",
+    "@swc/core": "^1.2.239",
     "@swc/jest": "^0.2.22",
-    "@types/eslint": "^8.4.5",
-    "@types/jest": "^28.1.6",
+    "@types/eslint": "^8.4.6",
+    "@types/jest": "^28.1.7",
     "@types/node": "^18",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
     "decimal.js": "^10.4.0",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-functional": "^4.2.2",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.8.2",
+    "eslint-plugin-jest": "^26.8.3",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
     "jest": "^28",
-    "lint-staged": "^13.0.3",
     "mathjs": "^11.0.1",
     "npm-run-all": "^4.1.5",
-    "open-cli": "^7.0.1",
     "prettier": "^2.7.1",
     "standard-version": "^9.5.0",
-    "trash-cli": "^5.0.0",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.10",
     "typescript": "^4.7.4"
@@ -92,13 +89,5 @@
   "packageManager": "pnpm@7.0.0",
   "prettier": {
     "singleQuote": true
-  },
-  "lint-staged": {
-    "*.ts": [
-      "prettier --parser typescript --write"
-    ],
-    "*.json": [
-      "prettier --parser json --write"
-    ]
   }
 }
