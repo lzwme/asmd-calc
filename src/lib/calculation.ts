@@ -35,7 +35,7 @@ export function add(...args): number {
       const e = Math.pow(10, Math.max(tDLen, vDLen));
       total = (Math.round(total * e) + Math.round(value * e)) / e;
     } else {
-      total += value;
+      total += typeof value === 'number' ? value : Number(value) || 0;
     }
   });
 

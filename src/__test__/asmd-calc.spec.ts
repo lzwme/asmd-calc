@@ -42,7 +42,7 @@ describe('class AsmdCalc', () => {
       +a
         .mul(0)
         .add(0.1) // 重置为 0.1
-        .mul(0.2, 2, 100)
+        .mul(0.2, 2, 100),
     ).toBe(4);
   });
 
