@@ -1,7 +1,6 @@
 [![@lzwme/asmd-calc](https://nodei.co/npm/@lzwme/asmd-calc.png)][download-url]
 
-@lzwme/asmd-calc
-========
+# @lzwme/asmd-calc
 
 [![build status](https://github.com/lzwme/asmd-calc/actions/workflows/node-ci.yml/badge.svg)](https://github.com/lzwme/asmd-calc/actions/workflows/node-ci.yml)
 [![NPM version][npm-badge]][npm-url]
@@ -11,6 +10,7 @@
 [![GitHub forks][forks-badge]][forks-url]
 [![GitHub stars][stars-badge]][stars-url]
 ![license MIT](https://img.shields.io/github/license/lzwme/asmd-calc)
+
 <!-- [![minzipped size][bundlephobia-badge]][bundlephobia-url] -->
 
 一个短小精悍的四则运算 JS 工具方法库，支持浮点数精度的加减乘除计算。
@@ -63,7 +63,6 @@ console.log(calc.add(0.1, 0.2, 0.3));
 
 #### commonjs
 
-
 ```js
 const calc = require('@lzwme/asmd-calc');
 
@@ -83,12 +82,7 @@ console.log(+a.add(0.1).add(0.2, 0.3));
 // => 0.6
 
 const b = new AsmdCalc(0.3);
-  b.add(0.1, 0.2)
-    .add(0.1)
-    .sub(0.1, 0.2)
-    .sub(0.1)
-    .div(0.3)
-    .mul(0.3);
+b.add(0.1, 0.2).add(0.1).sub(0.1, 0.2).sub(0.1).div(0.3).mul(0.3);
 console.log(+b);
 // => 0.3
 console.log(b.value);
@@ -111,8 +105,8 @@ console.log(calc.add(0.1).add(0.2, 0.3));
 - `sub(...args)` 减法运算
 - `mul(...args)` 乘法运算
 - `div(...args)` 除法运算
-- `keepDotLength(value, len, isRounding = false)` 保留 N 位小数(支持四舍五入或截断)
-- `toFixed(value, len)` 保留 N 位小数(四舍五入，返回字符串)
+- `keepDotLength(value: number | string, precision: number, type: 'ceil' | 'round' | 'fround' | 'floor' | boolean = 'floor'): number | null` 保留 N 位小数，返回数值
+- `toFixed(value: number | string, precision: number, type: 'ceil' | 'round' | 'fround' | 'floor' | boolean = 'floor'): number | null` 保留 N 位小数(默认四舍五入[floor]，返回字符串)
 - `getDecimalLen(num)` 获取指定数值的小数位长度
 - `toNonExponential(num)` 将指定的浮点数转换为非科学计数法的字符串格式
 
@@ -151,8 +145,8 @@ npm run benchmark
 
 以下结果为在同一机器上分别执行 `10000*N` 次的耗时对比：
 
-| type/times |   jsRaw  | asmd-calc |  mathjs   |
-|     ---    |   ---    |    ---    |    ---    |
+| type/times | jsRaw    | asmd-calc | mathjs    |
+| ---------- | -------- | --------- | --------- |
 | add-10000  | 19.225ms | 169.535ms | 415.145ms |
 | sub-10000  | 16.269ms | 34.827ms  | 171.263ms |
 | mul-10000  | 18.518ms | 51.625ms  | 235.868ms |
@@ -160,8 +154,8 @@ npm run benchmark
 
 预执行 `100_000` 次后再执行 `10000*N` 次的耗时对比：
 
-| type/times |   jsRaw  | asmd-calc |  mathjs   |
-|     ---    |   ---    |    ---    |    ---    |
+| type/times | jsRaw    | asmd-calc | mathjs    |
+| ---------- | -------- | --------- | --------- |
 | add-10000  | 7.768ms  | 155.836ms | 362.819ms |
 | sub-10000  | 8.339ms  | 25.147ms  | 155.611ms |
 | mul-10000  | 9.995ms  | 35.685ms  | 224.357ms |
@@ -171,41 +165,40 @@ npm run benchmark
 
 随机数据集（测试用例）:
 
-| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 4.973ms | 144.934ms | 192.637ms | 363.513ms |
-| sub-10000 | 6.971ms | 21.84ms | 65.373ms | 165.045ms |
-| mul-10000 | 8.45ms | 36.014ms | 107.898ms | 223.708ms |
-| div-10000 | 14.427ms | 64.409ms | 154.766ms | 290.645ms |
+| type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs]  |
+| ---------- | ----------- | ---------- | --------- | --------- |
+| add-10000  | 4.973ms     | 144.934ms  | 192.637ms | 363.513ms |
+| sub-10000  | 6.971ms     | 21.84ms    | 65.373ms  | 165.045ms |
+| mul-10000  | 8.45ms      | 36.014ms   | 107.898ms | 223.708ms |
+| div-10000  | 14.427ms    | 64.409ms   | 154.766ms | 290.645ms |
 
 纯小数数据集:
 
 | type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 0.248ms | 16.958ms | 30.875ms | 55.538ms |
-| sub-10000 | 0.462ms | 22.529ms | 32.719ms | 46.321ms |
-| mul-10000 | 0.232ms | 18.006ms | 34.765ms | 46.195ms |
-| div-10000 | 0.519ms | 17.37ms | 36.031ms | 47.271ms |
+| ---------- | ----------- | ---------- | --------- | -------- |
+| add-10000  | 0.248ms     | 16.958ms   | 30.875ms  | 55.538ms |
+| sub-10000  | 0.462ms     | 22.529ms   | 32.719ms  | 46.321ms |
+| mul-10000  | 0.232ms     | 18.006ms   | 34.765ms  | 46.195ms |
+| div-10000  | 0.519ms     | 17.37ms    | 36.031ms  | 47.271ms |
 
 纯整数数据集:
 
 | type/times | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 0.172ms | 0.681ms | 10.248ms | 35.004ms |
-| sub-10000 | 0.816ms | 1.069ms | 12.736ms | 32.836ms |
-| mul-10000 | 0.178ms | 0.733ms | 13.827ms | 33.486ms |
-| div-10000 | 0.488ms | 0.699ms | 19.847ms | 42.217ms |
-
+| ---------- | ----------- | ---------- | --------- | -------- |
+| add-10000  | 0.172ms     | 0.681ms    | 10.248ms  | 35.004ms |
+| sub-10000  | 0.816ms     | 1.069ms    | 12.736ms  | 32.836ms |
+| mul-10000  | 0.178ms     | 0.733ms    | 13.827ms  | 33.486ms |
+| div-10000  | 0.488ms     | 0.699ms    | 19.847ms  | 42.217ms |
 
 ## 相关参考
 
 - [确保前端 JavaScript 浮点数精度的四则运算方法](https://lzw.me/a/javascript-floating-point-arithmetic.html)
+
 ## License
 
 `@lzwme/asmd-calc` is released under the MIT license.
 
 该插件由[志文工作室](https://lzw.me)开发和维护。
-
 
 [stars-badge]: https://img.shields.io/github/stars/lzwme/asmd-calc.svg
 [stars-url]: https://github.com/lzwme/asmd-calc/stargazers

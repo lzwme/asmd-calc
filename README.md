@@ -1,7 +1,6 @@
 [![@lzwme/asmd-calc](https://nodei.co/npm/@lzwme/asmd-calc.png)][download-url]
 
-@lzwme/asmd-calc
-========
+# @lzwme/asmd-calc
 
 [![build status](https://github.com/lzwme/asmd-calc/actions/workflows/node-ci.yml/badge.svg)](https://github.com/lzwme/asmd-calc/actions/workflows/node-ci.yml)
 [![NPM version][npm-badge]][npm-url]
@@ -11,9 +10,10 @@
 [![GitHub forks][forks-badge]][forks-url]
 [![GitHub stars][stars-badge]][stars-url]
 ![license MIT](https://img.shields.io/github/license/lzwme/asmd-calc)
+
 <!-- [![minzipped size][bundlephobia-badge]][bundlephobia-url] -->
 
-[简体中文](./.github/README-zh-CN.md)
+[简体中文](./README-zh-CN.md)
 
 A short and concise JavaScript library for the four fundamental operations of arithmetic, which supports the addition, subtraction, multiplication and division calculation of floating-point precision.
 
@@ -62,7 +62,6 @@ console.log(add(0.1, 0.2, 0.3));
 
 #### commonjs
 
-
 ```js
 const calc = require('@lzwme/asmd-calc');
 
@@ -82,12 +81,7 @@ console.log(+a.add(0.1).add(0.2, 0.3));
 // => 0.6
 
 const b = new AsmdCalc(0.3);
-  b.add(0.1, 0.2)
-    .add(0.1)
-    .sub(0.1, 0.2)
-    .sub(0.1)
-    .div(0.3)
-    .mul(0.3);
+b.add(0.1, 0.2).add(0.1).sub(0.1, 0.2).sub(0.1).div(0.3).mul(0.3);
 console.log(+b);
 // => 0.3
 console.log(b.value);
@@ -110,8 +104,8 @@ console.log(calc.add(0.1).add(0.2, 0.3));
 - `sub(...args);` - Subtraction
 - `mul(...args);` - Multiplication
 - `div(...args);` - Division
-- `keepDotLength(value, len, isRounding = false): number;` - Keep N decimal places
-- `toFixed(value, len): string;` - Similar to `Number.prototype.toFixed`, but fixed precision of the result
+- `keepDotLength(value: number | string, precision: number, type: 'ceil' | 'round' | 'fround' | 'floor' | boolean = 'floor'): number | null;` - Keep N decimal places
+- `toFixed(value: number | string, precision: number, type: 'ceil' | 'round' | 'fround' | 'floor' | boolean = 'floor'): string;` - Similar to `Number.prototype.toFixed`, but fixed precision of the result
 - `getDecimalLen(num): number;` - Get the decimal length
 - `toNonExponential(num): string;` - Convert to string format of unscientific counting method
 
@@ -147,51 +141,50 @@ See：[Benchmark](https://github.com/lzwme/asmd-calc/blob/master/benchmark/index
 
 The following results are the time-consuming comparison of executing `10000 * N` times on the same machine:
 
-| type/timeConst |   jsRaw  | asmd-calc |  mathjs   |
-|     ---    |   ---    |    ---    |    ---    |
-| add-10000  | 19.225ms | 169.535ms | 415.145ms |
-| sub-10000  | 16.269ms | 34.827ms  | 171.263ms |
-| mul-10000  | 18.518ms | 51.625ms  | 235.868ms |
-| div-10000  | 27.025ms | 79.504ms  | 300.706ms |
+| type/timeConst | jsRaw    | asmd-calc | mathjs    |
+| -------------- | -------- | --------- | --------- |
+| add-10000      | 19.225ms | 169.535ms | 415.145ms |
+| sub-10000      | 16.269ms | 34.827ms  | 171.263ms |
+| mul-10000      | 18.518ms | 51.625ms  | 235.868ms |
+| div-10000      | 27.025ms | 79.504ms  | 300.706ms |
 
 Pre execution of 1000000 times and then stats time-consuming of execution of `10000 * N` times:
 
-| type/timeConst |   jsRaw  | asmd-calc |  mathjs   |
-|     ---    |   ---    |    ---    |    ---    |
-| add-10000  | 7.768ms  | 155.836ms | 362.819ms |
-| sub-10000  | 8.339ms  | 25.147ms  | 155.611ms |
-| mul-10000  | 9.995ms  | 35.685ms  | 224.357ms |
-| div-10000  | 15.666ms | 77.407ms  | 280.322ms |
+| type/timeConst | jsRaw    | asmd-calc | mathjs    |
+| -------------- | -------- | --------- | --------- |
+| add-10000      | 7.768ms  | 155.836ms | 362.819ms |
+| sub-10000      | 8.339ms  | 25.147ms  | 155.611ms |
+| mul-10000      | 9.995ms  | 35.685ms  | 224.357ms |
+| div-10000      | 15.666ms | 77.407ms  | 280.322ms |
 
 ### Benchmark Details
 
-`random`:
+`random-10000times`:
 
-| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 4.973ms | 144.934ms | 192.637ms | 363.513ms |
-| sub-10000 | 6.971ms | 21.84ms | 65.373ms | 165.045ms |
-| mul-10000 | 8.45ms | 36.014ms | 107.898ms | 223.708ms |
-| div-10000 | 14.427ms | 64.409ms | 154.766ms | 290.645ms |
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs]  |
+| --- |    ---    |    ---    |    ---    |    ---    |
+| add | 5.01ms | 59.3607ms | 95.3418ms | 144.9646ms  |
+| sub | 5.0866ms | 9.3846ms | 33.8741ms | 62.0785ms  |
+| mul | 5.4093ms | 14.9623ms | 54.6482ms | 94.0914ms  |
+| div | 7.1796ms | 26.7458ms | 72.871ms | 117.2498ms  |
 
-`decimal`:
+`decimal-10000times`:
 
-| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 0.248ms | 16.958ms | 30.875ms | 55.538ms |
-| sub-10000 | 0.462ms | 22.529ms | 32.719ms | 46.321ms |
-| mul-10000 | 0.232ms | 18.006ms | 34.765ms | 46.195ms |
-| div-10000 | 0.519ms | 17.37ms | 36.031ms | 47.271ms |
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs]  |
+| --- |    ---    |    ---    |    ---    |    ---    |
+| add | 0.9363ms | 5.597ms  | 12.3949ms | 18.1254ms  |
+| sub | 0.7557ms | 7.9353ms | 12.6472ms | 18.1084ms  |
+| mul | 0.4496ms | 7.2964ms | 14.6238ms | 20.0657ms  |
+| div | 0.4945ms | 6.0127ms | 15.5085ms | 20.1288ms  |
 
-`integer`:
+`integer-10000times`:
 
-| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs] |
-|     ---    |   ---    |    ---    |    ---    |    ---    |
-| add-10000 | 0.172ms | 0.681ms | 10.248ms | 35.004ms |
-| sub-10000 | 0.816ms | 1.069ms | 12.736ms | 32.836ms |
-| mul-10000 | 0.178ms | 0.733ms | 13.827ms | 33.486ms |
-| div-10000 | 0.488ms | 0.699ms | 19.847ms | 42.217ms |
-
+| type/timeConst | [jsRawCalc] | [asmdCalc] | [decimal] | [mathjs]  |
+| --- |    ---    |    ---    |    ---    |    ---    |
+| add | 0.8038ms | 0.5012ms | 6.1372ms | 13.3008ms  |
+| sub | 0.4676ms | 0.7482ms | 6.4895ms | 16.1568ms  |
+| mul | 0.3157ms | 0.5464ms | 7.799ms  | 15.9254ms  |
+| div | 0.614ms  | 0.4786ms | 9.8204ms | 17.2268ms  |
 
 ## References
 
@@ -204,7 +197,6 @@ Pre execution of 1000000 times and then stats time-consuming of execution of `10
 `@lzwme/asmd-calc` is released under the MIT license.
 
 该插件由[志文工作室](https://lzw.me)开发和维护。
-
 
 [stars-badge]: https://img.shields.io/github/stars/lzwme/asmd-calc.svg
 [stars-url]: https://github.com/lzwme/asmd-calc/stargazers

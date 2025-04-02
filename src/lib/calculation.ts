@@ -1,8 +1,8 @@
 /*
  * @Author: renxia
  * @Date: 2018-09-10 15:10:40
- * @LastEditors: lzw
- * @LastEditTime: 2022-06-27 10:37:13
+ * @LastEditors: renxia
+ * @LastEditTime: 2025-04-02 16:47:52
  * @Description: 支持浮点数精度的加减乘除四则运算
  */
 
@@ -176,17 +176,17 @@ export function div(...args): number {
  * @param precision 小数位数，应为 0-16 之间的整数
  * @param isrounding 是否四舍五入取值。默认 false
  */
-export function keepDotLength(value: number | string, precision: number, isRounding = false): number | null {
+export function keepDotLength(
+  value: number | string,
+  precision: number,
+  type: 'ceil' | 'round' | 'fround' | 'floor' | boolean = 'floor',
+): number | null {
   if (isNull(value)) return null;
-  precision = Math.max(Number(precision), 0) || 0;
 
-  if (isRounding) return Number(toFixed(Number(value), precision));
+  if (type === true) type = 'round';
+  else if (!type) type = 'floor';
 
-  let str = toNonExponential(Number(value));
-
-  if (str.indexOf('.') !== -1) str = str.substring(0, str.indexOf('.') + precision + 1);
-
-  return Number(str);
+  return Number(toFixed(value, precision, type));
 }
 
 /**
@@ -207,13 +207,18 @@ export function keepDotLength(value: number | string, precision: number, isRound
  *
  * @param value 数值
  * @param precision 小数位数，应为 0-16 之间的整数
+ * @param type 进位处理方法：
+ *  - round - 四舍五入
+ *  - ceil 向上取整
+ *  - floor 向下取整(截断)
  */
-export function toFixed(value: number | string, precision: number): string | null {
+export function toFixed(value: number | string, precision: number, type: 'ceil' | 'round' | 'fround' | 'floor' = 'round'): string | null {
   if (isNull(value)) return null;
+  if (!(type in Math)) throw new Error('type must be one of ["ceil", "round", "fround", "floor"]. current: ' + type);
 
   value = Number(value);
   precision = Math.max(Number(precision), 0);
-  if (!precision) return String(Math.round(value));
+  if (!precision) return String(Math[type](value));
 
   const valList = toNonExponential(value).split('.');
 
@@ -221,7 +226,7 @@ export function toFixed(value: number | string, precision: number): string | nul
     valList[1] = new Array(precision + 1).join('0');
     return valList.join('.');
   } else {
-    const result = String(Math.round(Math.pow(10, precision) * Number('0.' + valList[1])) / Math.pow(10, precision)).split('.');
+    const result = String(Math[type](Math.pow(10, precision) * Number('0.' + valList[1])) / Math.pow(10, precision)).split('.');
 
     // result = 1，则没有小数部分
     if (!result[1]) {

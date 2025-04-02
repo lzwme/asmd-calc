@@ -1,4 +1,6 @@
 import * as calc from '../lib/calculation';
+const { toFixed } = calc;
+
 describe('calc', () => {
   it('addition 各种入参测试', () => {
     const list = [
@@ -220,8 +222,10 @@ describe('calc', () => {
       expect(calc.keepDotLength(item[0], item[1], true)).toBe(item[2]);
     });
   });
+});
 
-  it('toFixed 各种入参测试', () => {
+describe('toFixed function', () => {
+  it('toFixed - round 各种入参测试', () => {
     const list = [
       [null, 3, null],
       [1, null, 1],
@@ -250,6 +254,48 @@ describe('calc', () => {
 
     list.forEach((item) => {
       expect(calc.toFixed(item[0], item[1] as number)).toBe(null == item[2] ? item[2] : String(item[2]));
+      expect(calc.toFixed(item[0], item[1] as number, 'round')).toBe(null == item[2] ? item[2] : String(item[2]));
     });
+  });
+
+  it('should return null when value is null', () => {
+    expect(toFixed(null, 2)).toBeNull();
+  });
+
+  it('should throw error when type is invalid', () => {
+    expect(() => toFixed(1.23, 2, 'invalid' as 'ceil')).toThrowError();
+  });
+
+  it('should handle precision 0 correctly', () => {
+    expect(toFixed(3.14, 0, 'ceil')).toBe('4');
+    expect(toFixed(3.14, 0, 'floor')).toBe('3');
+    expect(toFixed(3.84, 0, 'floor')).toBe('3');
+
+    expect(toFixed(3.14, 0, 'round')).toBe('3');
+    expect(toFixed(3.84, 0, 'round')).toBe('4');
+  });
+
+  it('should handle numbers without fractional part', () => {
+    expect(toFixed(123, 3)).toBe('123.000');
+  });
+
+  it('should handle numbers with fractional part', () => {
+    expect(toFixed(1.2345, 3, 'ceil')).toBe('1.235');
+    expect(toFixed(1.2345, 3, 'floor')).toBe('1.234');
+
+    expect(toFixed(1.2341, 3, 'round')).toBe('1.234');
+    expect(toFixed(1.2345, 3, 'round')).toBe('1.235');
+  });
+
+  it('should handle numbers requiring rounding up', () => {
+    expect(toFixed(0.999, 2, 'ceil')).toBe('1.00');
+  });
+
+  it('should handle numbers with exponential notation', () => {
+    expect(toFixed(1.23e-5, 5)).toBe('0.00001');
+  });
+
+  it('should handle string input', () => {
+    expect(toFixed('123.456', 2)).toBe('123.46');
   });
 });
